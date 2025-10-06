@@ -67,7 +67,7 @@ Start.TextSize = 10
 Start.TextWrapped = true
 
 Start.MouseButton1Click:Connect(function()
-    if Key.Text == "7355608666" then
+    if Key.Text == "fg666888" then
         ScreenGui:Destroy()
 
     
@@ -169,11 +169,12 @@ local Window = Library:CreateWindow({
 	-- Position and Size are also valid options here
 	-- but you do not need to define them unless you are changing them :)
 
-	Title = "飞哥中心",
+	Title = "飞哥",
 	Footer = "version: example",
 	Icon = 95816097006870,
 	NotifySide = "Right",
 	ShowCustomCursor = false,
+	
 })
 
 -- CALLBACK NOTE:
@@ -9449,7 +9450,7 @@ end)
 })
 
 local MyButton = LeftGroupBox:AddButton({
-	Text = "  ",
+	Text = "键盘",
 	Func = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
 	end,
@@ -9647,6 +9648,7 @@ local MyButton = LeftGroupBox:AddButton({
 local Tabs = {
 	-- Creates a new tab titled Main
 	Main = Window:AddTab("脚本", "user"),
+	
 }
 
 local LeftGroupBox = Tabs.Main:AddLeftGroupbox("Groupbox", "boxes")
@@ -9747,171 +9749,37 @@ local MyButton = LeftGroupBox:AddButton({
 
 
 
-DropdownGroupBox:AddDropdown("MyPlayerDropdown", {
-	SpecialType = "Player",
-	ExcludeLocalPlayer = true, -- true / false, excludes the localplayer from the Player type
-	Text = "A player dropdown",
-	Tooltip = "This is a tooltip", -- Information shown when you hover over the dropdown
+local Tabs = {
+	-- Creates a new tab titled Main
+	["UI Settings"] = Window:AddTab("UI Settings", "cog"),
+}
 
-	Callback = function(Value)
-		print("[cb] Player dropdown got changed:", Value)
-	end,
-})
-
-DropdownGroupBox:AddDropdown("MyTeamDropdown", {
-	SpecialType = "Team",
-	Text = "A team dropdown",
-	Tooltip = "This is a tooltip", -- Information shown when you hover over the dropdown
-
-	Callback = function(Value)
-		print("[cb] Team dropdown got changed:", Value)
-	end,
-})
-
--- Label:AddColorPicker
--- Arguments: Idx, Info
-
--- You can also ColorPicker & KeyPicker to a Toggle as well
-
-LeftGroupBox:AddLabel("Color"):AddColorPicker("ColorPicker", {
-	Default = Color3.new(0, 1, 0), -- Bright green
-	Title = "Some color", -- Optional. Allows you to have a custom color picker title (when you open it)
-	Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
-
-	Callback = function(Value)
-		print("[cb] Color changed!", Value)
-	end,
-})
-
-Options.ColorPicker:OnChanged(function()
-	print("Color changed!", Options.ColorPicker.Value)
-	print("Transparency changed!", Options.ColorPicker.Transparency)
-end)
-
-Options.ColorPicker:SetValueRGB(Color3.fromRGB(0, 255, 140))
-
--- Label:AddKeyPicker
--- Arguments: Idx, Info
-
-LeftGroupBox:AddLabel("Keybind"):AddKeyPicker("KeyPicker", {
-	-- SyncToggleState only works with toggles.
-	-- It allows you to make a keybind which has its state synced with its parent toggle
-
-	-- Example: Keybind which you use to toggle flyhack, etc.
-	-- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
-
-	Default = "MB2", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
-	SyncToggleState = false,
-
-	-- You can define custom Modes but I have never had a use for it.
-	Mode = "Toggle", -- Modes: Always, Toggle, Hold, Press (example down below)
-
-	Text = "Auto lockpick safes", -- Text to display in the keybind menu
-	NoUI = false, -- Set to true if you want to hide from the Keybind menu,
-
-	-- Occurs when the keybind is clicked, Value is `true`/`false`
-	Callback = function(Value)
-		print("[cb] Keybind clicked!", Value)
-	end,
-
-	-- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
-	ChangedCallback = function(New)
-		print("[cb] Keybind changed!", New)
-	end,
-})
-
--- OnClick is only fired when you press the keybind and the mode is Toggle
--- Otherwise, you will have to use Keybind:GetState()
-Options.KeyPicker:OnClick(function()
-	print("Keybind clicked!", Options.KeyPicker:GetState())
-end)
-
-Options.KeyPicker:OnChanged(function()
-	print("Keybind changed!", Options.KeyPicker.Value)
-end)
-
-task.spawn(function()
-	while task.wait(1) do
-		-- example for checking if a keybind is being pressed
-		local state = Options.KeyPicker:GetState()
-		if state then
-			print("KeyPicker is being held down")
-		end
-
-		if Library.Unloaded then
-			break
-		end
-	end
-end)
-
-Options.KeyPicker:SetValue({ "MB2", "Hold" }) -- Sets keybind to MB2, mode to Hold
-
--- Label:KeyPicker (Press Mode)
-
-local KeybindNumber = 0
-
-LeftGroupBox:AddLabel("Press Keybind"):AddKeyPicker("KeyPicker2", {
-	-- Example: Press Keybind which you use to run a callback when the key was pressed.
-
-	Default = "X", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
-
-	Mode = "Press",
-	WaitForCallback = false, -- Locks the keybind during the execution of Callback and OnChanged.
-
-	Text = "Increase Number", -- Text to display in the keybind menu
-
-	-- Occurs when the keybind is clicked, Value is always `true` for Press keybind.
-	Callback = function()
-		KeybindNumber = KeybindNumber + 1
-		print("[cb] Keybind clicked! Number increased to:", KeybindNumber)
-	end
-})
-
--- Long text label to demonstrate UI scrolling behaviour.
-local LeftGroupBox2 = Tabs.Main:AddLeftGroupbox("Groupbox #2")
-LeftGroupBox2:AddLabel(
-	"This label spans multiple lines! We're gonna run out of UI space...\nJust kidding! Scroll down!\n\n\nHello from below!",
-	true
-)
-
-local TabBox = Tabs.Main:AddRightTabbox() -- Add Tabbox on right side
-
--- Anything we can do in a Groupbox, we can do in a Tabbox tab (AddToggle, AddSlider, AddLabel, etc etc...)
-local Tab1 = TabBox:AddTab("Tab 1")
-Tab1:AddToggle("Tab1Toggle", { Text = "Tab1 Toggle" })
-
-local Tab2 = TabBox:AddTab("Tab 2")
-Tab2:AddToggle("Tab2Toggle", { Text = "Tab2 Toggle" })
-
-Library:OnUnload(function()
-	print("Unloaded!")
-end)
-
+local LeftGroupBox = Tabs["UI Settings"]:AddLeftGroupbox("这个没用的宝宝", "boxes")
+-- You can add Groupboxes to your tabs
+-- Groupboxes allow you to separate your tab into sections
 -- Anything we can do in a Groupbox, we can do in a Key tab (AddToggle, AddSlider, AddLabel, etc etc...)
-Tabs.Key:AddLabel({
-	Text = "Key: Banana",
-	DoesWrap = true,
-	Size = 16,
-})
+
+
+
 
 -- UI Settings
 local MenuGroup = Tabs["UI Settings"]:AddLeftGroupbox("Menu", "wrench")
 
-MenuGroup:AddToggle("KeybindMenuOpen", {
+MenuGroup:AddToggle("脚本快捷键没用宝宝", {
 	Default = Library.KeybindFrame.Visible,
-	Text = "Open Keybind Menu",
+	Text = "脚本快捷键",
 	Callback = function(value)
 		Library.KeybindFrame.Visible = value
 	end,
 })
 MenuGroup:AddToggle("ShowCustomCursor", {
-	Text = "Custom Cursor",
+	Text = "自定义鼠标宝宝",
 	Default = true,
 	Callback = function(Value)
 		Library.ShowCustomCursor = Value
 	end,
 })
-MenuGroup:AddDropdown("NotificationSide", {
+MenuGroup:AddDropdown("这个我也不知道希望不要瞎弄哦宝宝", {
 	Values = { "Left", "Right" },
 	Default = "Right",
 
@@ -9921,7 +9789,7 @@ MenuGroup:AddDropdown("NotificationSide", {
 		Library:SetNotifySide(Value)
 	end,
 })
-MenuGroup:AddDropdown("DPIDropdown", {
+MenuGroup:AddDropdown("这个是调大小的宝宝", {
 	Values = { "50%", "75%", "100%", "125%", "150%", "175%", "200%" },
 	Default = "100%",
 
@@ -9935,7 +9803,7 @@ MenuGroup:AddDropdown("DPIDropdown", {
 	end,
 })
 MenuGroup:AddDivider()
-MenuGroup:AddLabel("Menu bind")
+MenuGroup:AddLabel("开关脚本快捷键")
 	:AddKeyPicker("MenuKeybind", { Default = "RightShift", NoUI = true, Text = "Menu keybind" })
 
 MenuGroup:AddButton("Unload", function()
