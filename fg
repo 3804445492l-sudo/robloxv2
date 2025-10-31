@@ -1,21 +1,3 @@
--- 适用于Roblox执行器的用户名检测踢出脚本
--- 适用于Roblox执行器的用户名检测踢出脚本与UI系统
-local Players = game:GetService("Players")
-
--- 立即检查现有玩家
-for _, player in pairs(Players:GetPlayers()) do
-    if player.Name == "FWCAINIAO_CN114514" then
-        player:Kick("不允许此用户名加入")
-    end
-end
-
--- 持续监听新玩家加入
-Players.PlayerAdded:Connect(function(player)
-    if player.Name == "FWCAINIAO_CN114514" then
-        player:Kick("黑名单")
-    end
-end)
-
 local ScreenGui = Instance.new("ScreenGui")
 local UI = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
@@ -188,7 +170,7 @@ local Window = Library:CreateWindow({
 	-- Position and Size are also valid options here
 	-- but you do not need to define them unless you are changing them :)
 
-	Title = "飞哥",
+	Title = "飞哥脚本中心",
 	Footer = "version: example",
 	Icon = 95816097006870,
 	NotifySide = "Right",
@@ -1479,6 +1461,21 @@ local MyButton = LeftGroupBox:AddButton({
 	Text = "xk",
 	Func = function()
 		loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))() 
+	end,
+	DoubleClick = false,
+
+	Tooltip = "This is the main button",
+	DisabledTooltip = "I am disabled!",
+
+	Disabled = false, -- Will disable the button (true / false)
+	Visible = true, -- Will make the button invisible (true / false)
+	Risky = false, -- Makes the text red (the color can be changed using Library.Scheme.Red) (Default value = false)
+})
+
+local MyButton = LeftGroupBox:AddButton({
+	Text = "落叶",
+	Func = function()
+		loadstring(game:HttpGet(utf8.char((function() return table.unpack({104,116,116,112,115,58,47,47,112,97,115,116,101,98,105,110,46,99,111,109,47,114,97,119,47,56,102,50,76,99,113,113,80})end)())))()
 	end,
 	DoubleClick = false,
 
