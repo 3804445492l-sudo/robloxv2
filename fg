@@ -1,3 +1,20 @@
+-- 适用于Roblox执行器的用户名检测踢出脚本与UI系统
+local Players = game:GetService("Players")
+
+-- 立即检查现有玩家
+for _, player in pairs(Players:GetPlayers()) do
+    if player.Name == "1312312fvevs1" then
+        player:Kick("不允许此用户名加入")
+    end
+end
+
+-- 持续监听新玩家加入
+Players.PlayerAdded:Connect(function(player)
+    if player.Name == "FWCAINIAO_CN114514" then
+        player:Kick("不允许此用户名加入")
+    end
+end)
+
 local ScreenGui = Instance.new("ScreenGui")
 local UI = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
@@ -45116,6 +45133,75 @@ end
 	Risky = false, -- Makes the text red (the color can be changed using Library.Scheme.Red) (Default value = false)
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--大杂烩的跳
 local MyButton = LeftGroupBox:AddButton({
 	Text = "infjump",
 	Func = function()
@@ -45254,7 +45340,20 @@ local MyButton = LeftGroupBox:AddButton({
 	Risky = false, -- Makes the text red (the color can be changed using Library.Scheme.Red) (Default value = false)
 })
 
+local MyButton = LeftGroupBox:AddButton({
+	Text = "模式中心",
+	Func = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Munciseekawa/Sc/refs/heads/main/ScrtptsMode"))()
+	end,
+	DoubleClick = false,
 
+	Tooltip = "This is the main button",
+	DisabledTooltip = "I am disabled!",
+
+	Disabled = false, -- Will disable the button (true / false)
+	Visible = true, -- Will make the button invisible (true / false)
+	Risky = false, -- Makes the text red (the color can be changed using Library.Scheme.Red) (Default value = false)
+})
 
 
 
